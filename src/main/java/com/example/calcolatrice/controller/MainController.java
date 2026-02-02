@@ -105,8 +105,9 @@ public class MainController {
     }
 
     public void risultato() throws ExpressionException {
-        //TODO;
         Espressione e = new Espressione(testo.getText());
-        e.risolvi();
+        testo.setText(e.calcRPN().toString());
+        simboli.clear();
+        simboli.add(testo.getText());
     }
 }

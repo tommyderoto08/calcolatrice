@@ -7,33 +7,12 @@ public class Espressione {
     private ArrayList tokenList;
     private ArrayList validTokensList;
     private ArrayList rpnExpression;
-    private Frazione risultato;
 
     public Espressione(String inputExpr) {
         this.inputExpr = inputExpr;
         tokenList = new ArrayList();
         validTokensList = new ArrayList();
         rpnExpression = new ArrayList();
-    }
-
-    public Frazione getRisultato() {
-        return risultato;
-    }
-
-    public ArrayList getValidTokensList() {
-        return validTokensList;
-    }
-
-    public ArrayList getTokenList() {
-        return tokenList;
-    }
-
-    public ArrayList getRpnExpression() {
-        return rpnExpression;
-    }
-
-    public String getInputExpr() {
-        return inputExpr;
     }
 
     public void scanner() throws ExpressionException {
@@ -43,7 +22,7 @@ public class Espressione {
         boolean inLetturaNumero = false;
         for (char c : inputExpr.toCharArray()) {
             switch (c) {
-                case '+', '-', '*', '/', '^':
+                case '+', '-', 'x', ':', '^':
                     if (inLetturaNumero)
                         tokenList.add(new Frazione(numeratore, 1));
                     tokenList.add(Operatore.getOperatore(c));
@@ -102,18 +81,19 @@ public class Espressione {
      * traduce una espressione valida in espressione RPN
      */
     public void shuntingYard() throws ExpressionException {
+        parser();
         Stack<Object> operatori = new Stack<>();
-        Stack<Object> queue = new Stack<>();
+        ArrayList<Object> queue = new ArrayList<>();
         int posizione = 0;
 
         for(Object token : validTokensList){
             if(token instanceof Frazione){
-                queue.push(token);
+                queue.add(token);
             }
             if (token instanceof Operatore){
                 while(!operatori.isEmpty() && operatori.peek() instanceof Operatore){
                     if(((Operatore)operatori.peek()).getPriorità() >= ((Operatore)token).getPriorità()){
-                        queue.push(operatori.pop());
+                        queue.add(operatori.pop());
                     }else{
                         break;
                     }
@@ -125,7 +105,7 @@ public class Espressione {
             }
             if(token == Parentesi.PARENTESI_CHIUSA) {
                 while (operatori.peek() != Parentesi.PARENTESI_APERTA) {
-                    queue.push(operatori.pop());
+                    queue.add(operatori.pop());
                 }
                 operatori.pop();
             }
@@ -133,12 +113,13 @@ public class Espressione {
         }
         while(!operatori.isEmpty()){
             if(operatori.peek() instanceof Operatore){
-                queue.push(operatori.pop());
+                queue.add(operatori.pop());
             }else {
                 throw new ExpressionException("Syntax error", "L'espressione contiene parentesi non bilanciate in posizione " + posizione);
             }
 
         }
+        rpnExpression = queue;
     }
 
     /**
@@ -151,6 +132,7 @@ public class Espressione {
             stato = 2: letto Operando (Frazione)
             stato = 3: letta Parentesi Chiusa
          */
+        scanner();
         int stato = 0;
         for (Object token : tokenList) {
             switch (stato) {
@@ -241,10 +223,10 @@ public class Espressione {
      * valuta l'espressione RPN  rpnExpression e scrive il risultato
      * nella variabile risultato
      */
-    public void calcRPN() {
+    public Frazione calcRPN() throws ExpressionException {
+        shuntingYard();
         Frazione operando1, operando2, risultatoParziale = null;
         Deque<Frazione> stackOperandi = new ArrayDeque<>();
-        //Stack<Frazione> stackOperandi = new Stack<>();
         for (Object token : rpnExpression) {
             if (token instanceof Frazione) {
                 //aggiungo l'operatore allo stackOperandi
@@ -281,30 +263,6 @@ public class Espressione {
                 stackOperandi.push(risultatoParziale);
             }
         }
-        this.risultato = stackOperandi.pop();
-    }
-
-    public static Frazione risolvi(String stringInput) throws ExpressionException, ArithmeticException{
-        Espressione espressione = new Espressione(stringInput);
-        //da inputExpr a tokenList
-        espressione.scanner();
-        //da tokenList a validTokenList
-        espressione.parser();
-        //da valid TokenList a RPNExpr
-        espressione.shuntingYard();
-        //da RPNExpr a risultato
-        espressione.calcRPN();
-        return espressione.getRisultato();
-    }
-
-    public void risolvi() throws ExpressionException, ArithmeticException {
-        //da inputExpr a tokenList
-        scanner();
-        //da tokenList a validTokenList
-        parser();
-        //da valid TokenList a RPNExpr
-        shuntingYard();
-        //da RPNExpr a risultato
-        calcRPN();
+        return stackOperandi.pop();
     }
 }
