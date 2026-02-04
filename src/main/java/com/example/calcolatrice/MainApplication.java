@@ -11,9 +11,16 @@ public class MainApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("view/main-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 500);
+        // Dimensioni aumentate per mostrare correttamente il contenuto
+        Scene scene = new Scene(fxmlLoader.load(), 420, 760);
         stage.setTitle("calcolatrice");
         stage.setScene(scene);
+
+        // Impostato larghezza e altezza minima
+        stage.setMinWidth(420);
+        stage.setMinHeight(760);
+        stage.centerOnScreen();
+
         stage.show();
     }
 
