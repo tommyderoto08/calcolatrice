@@ -1,7 +1,7 @@
 package com.example.calcolatrice.model;
 
 public enum Operatore {
-    ADD('+', 2), SUB('-', 2), MULT('x', 3), DIV(':', 3), POW('^', 1);
+    ADD('+', 2), SUB('-', 2), MULT('*', 3), DIV('/', 3), POW('^', 1);
     private char simbolo;
     private int priorità;
 

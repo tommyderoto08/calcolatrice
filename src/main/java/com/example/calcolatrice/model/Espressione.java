@@ -22,7 +22,7 @@ public class Espressione {
         boolean inLetturaNumero = false;
         for (char c : inputExpr.toCharArray()) {
             switch (c) {
-                case '+', '-', 'x', ':', '^':
+                case '+', '-', '*', '/', '^':
                     if (inLetturaNumero)
                         tokenList.add(new Frazione(numeratore, 1));
                     tokenList.add(Operatore.getOperatore(c));
@@ -152,6 +152,8 @@ public class Espressione {
                                     "Espressione non valida",
                                     token + " deve seguir una parentesi aperta");
                         }
+                        validTokensList.add(token);
+                        stato=0;
                     } else if (token instanceof Frazione) {
                         validTokensList.add(token);
                         stato = 2;
