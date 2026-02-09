@@ -23,38 +23,23 @@ public class Espressione {
         for (char c : inputExpr.toCharArray()) {
             switch (c) {
                 case '+', '-', '*', '/', '^':
-                    if (inLetturaNumero)
-                        tokenList.add(new Frazione(numeratore, 1));
-                    tokenList.add(Operatore.getOperatore(c));
-                    inLetturaNumero = false;
-                    break;
-                case '(', ')':
-                    if (inLetturaNumero)
-                        tokenList.add(new Frazione(numeratore, 1));
-                    tokenList.add(Parentesi.getParentesi(c));
-                    if ((c == Parentesi.PARENTESI_APERTA.getSimbolo()))
-                        contaParentesi++;
-                    else {
-                        contaParentesi--;
-                        if (contaParentesi < 0)
-                            throw new ExpressionException(
-                                    "Espressione non valida",
-                                    "L'espressione contiene parentesi non bilanciate in posizione " + posizione
-                            );
-                    }
-                    inLetturaNumero = false;
-                    break;
-                case '1', '2', '3', '4', '5', '6', '7', '8', '9', '0':
                     if(inLetturaNumero){
-                        numeratore = 10 * numeratore + Integer.valueOf(Character.toString(c));
-                    }else{
-                        numeratore = Integer.valueOf(Character.toString(c));
-                        inLetturaNumero = true;
+                        tokenList.add(new Frazione(numeratore, 1));
+                        inLetturaNumero = false;
+                        numeratore = 0;
                     }
+                    if(c=='+')
+                        tokenList.add(Operatore.ADD);
+                    else if(c=='-')
+                        tokenList.add(Operatore.SUB);
+                    else if(c=='*')
+                        tokenList.add(Operatore.MULT);
+                    else if (c=='/')
+                        tokenList.add(Operatore.DIV);
+                    else if (c=='^')
+                        tokenList.add(Operatore.POW);
                     break;
-                case ' ':
-                    //non considero gli spazi
-                    break;
+
                 default:
                     throw new ExpressionException(
                             "Carattere non valido",
