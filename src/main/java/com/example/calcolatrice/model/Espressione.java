@@ -76,6 +76,7 @@ public class Espressione {
     }
 
 
+
     /**
      * Algoritmo ShuntingYards
      * traduce una espressione valida in espressione RPN
@@ -134,17 +135,29 @@ public class Espressione {
          */
         scanner();
         int stato = 0;
+        boolean operatoreUsato = false;
         for (Object token : tokenList) {
             switch (stato) {
                 case 0:
                     /*-- stato 0 ----- in attesa di espressione -------------------------------*/
                     if (token instanceof Operatore) {
-                        if(!token.equals("+") && !token.equals("-")){
-                            throw new ExpressionException(
-                                    "Espressione non valida",
-                                    token + " non può essere inserito per primo");
+                        if (operatoreUsato){
+                            throw new ExpressionException("espressione non valida", token + " non essere inserito dopo un opertore");
                         }
-                        validTokensList.add(token);
+                        switch ((Operatore)token){
+                            case ADD:
+                                operatoreUsato = true;
+                                break;
+                            case SUB:
+                                operatoreUsato = true;
+                                validTokensList.add(new Frazione(-1,1));
+                                validTokensList.add(Operatore.MULT);
+                                break;
+                            default:
+                                throw new ExpressionException("espressione non valida", token + " non può essere inserito per primo");
+
+                        }
+
                         stato = 1;
                     } else if (token instanceof Parentesi) {
                         if(token.equals(Parentesi.PARENTESI_CHIUSA)){
