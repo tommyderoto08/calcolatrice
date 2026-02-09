@@ -166,9 +166,11 @@ public class Espressione {
                                     token + " deve seguir una parentesi aperta");
                         }
                         validTokensList.add(token);
+                        operatoreUsato = false;
                         stato=0;
                     } else if (token instanceof Frazione) {
                         validTokensList.add(token);
+                        operatoreUsato = false;
                         stato = 2;
                     }
 
@@ -176,11 +178,17 @@ public class Espressione {
                 case 1:
                     /*-- stato 1 ----- letto Operatore -----------------------------*/
                     if (token instanceof Operatore) {
-                        throw new ExpressionException(
-                                "Espressione non valida",
-                                token + " non può seguire un altro operatore");
+                        if((token.equals(Operatore.ADD) || token.equals(Operatore.SUB)) && !operatoreUsato && ((Operatore)tokenList.getLast()).getPriorità()==2){
+                            operatoreUsato = true;
+                            if(token.equals(Operatore.SUB)){
+                                validTokensList.add(new Frazione(-1,1));
+                                validTokensList.add(Operatore.MULT);
+                            }
+                        }
+                        throw new ExpressionException("Espressione non valida", token + " non può seguire un altro operatore");
                     } else if (token instanceof Frazione) {
                         validTokensList.add(token);
+                        operatoreUsato = false;
                         stato = 2;
                     } else if (token instanceof Parentesi) {
                         if(token.equals(Parentesi.PARENTESI_CHIUSA)){
@@ -189,6 +197,7 @@ public class Espressione {
                                     token + " non può seguire un operatore");
                         }
                         validTokensList.add(token);
+                        operatoreUsato = false;
                         stato = 0;
                     }
                     break;
