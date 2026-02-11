@@ -15,23 +15,23 @@
                 <Font name="System Bold" size="56.0" />
             </font>
             <padding>
-                <Insets left="10.0" right="10.0" top="8.0" bottom="8.0"/>
+                <Insets bottom="8.0" left="10.0" right="10.0" top="8.0" />
             </padding>
         </Label>
 
         <HBox alignment="CENTER" prefHeight="90.0" prefWidth="360.0" spacing="12.0">
             <children>
                 <Button fx:id="pot" mnemonicParsing="false" onAction="#modifica" prefHeight="80.0" prefWidth="80.0" text="^">
-                    <font><Font size="24.0"/></font>
+                    <font><Font size="24.0" /></font>
                 </Button>
                 <Button fx:id="pAperta" mnemonicParsing="false" onAction="#modifica" prefHeight="80.0" prefWidth="80.0" text="(">
-                    <font><Font size="24.0"/></font>
+                    <font><Font size="24.0" /></font>
                 </Button>
                 <Button fx:id="pChiusa" mnemonicParsing="false" onAction="#modifica" prefHeight="80.0" prefWidth="80.0" text=")">
-                    <font><Font size="24.0"/></font>
+                    <font><Font size="24.0" /></font>
                 </Button>
                 <Button fx:id="indietro" mnemonicParsing="false" onAction="#indietro" prefHeight="80.0" prefWidth="80.0" text="←">
-                    <font><Font size="24.0"/></font>
+                    <font><Font size="24.0" /></font>
                 </Button>
             </children>
         </HBox>
@@ -39,16 +39,16 @@
         <HBox alignment="CENTER" prefHeight="90.0" prefWidth="360.0" spacing="12.0">
             <children>
                 <Button fx:id="btn7" mnemonicParsing="false" onAction="#modifica" prefHeight="80.0" prefWidth="80.0" text="7">
-                    <font><Font size="28.0"/></font>
+                    <font><Font size="28.0" /></font>
                 </Button>
                 <Button fx:id="btn8" mnemonicParsing="false" onAction="#modifica" prefHeight="80.0" prefWidth="80.0" text="8">
-                    <font><Font size="28.0"/></font>
+                    <font><Font size="28.0" /></font>
                 </Button>
                 <Button fx:id="btn9" mnemonicParsing="false" onAction="#modifica" prefHeight="80.0" prefWidth="80.0" text="9">
-                    <font><Font size="28.0"/></font>
+                    <font><Font size="28.0" /></font>
                 </Button>
-                <Button fx:id="molt" mnemonicParsing="false" onAction="#modifica" prefHeight="80.0" prefWidth="80.0" text="×">
-                    <font><Font size="28.0"/></font>
+                <Button fx:id="molt" mnemonicParsing="false" onAction="#modifica" prefHeight="80.0" prefWidth="80.0" text="*">
+                    <font><Font size="28.0" /></font>
                 </Button>
             </children>
         </HBox>
@@ -56,16 +56,16 @@
         <HBox alignment="CENTER" prefHeight="90.0" prefWidth="360.0" spacing="12.0">
             <children>
                 <Button fx:id="btn4" mnemonicParsing="false" onAction="#modifica" prefHeight="80.0" prefWidth="80.0" text="4">
-                    <font><Font size="28.0"/></font>
+                    <font><Font size="28.0" /></font>
                 </Button>
                 <Button fx:id="btn5" mnemonicParsing="false" onAction="#modifica" prefHeight="80.0" prefWidth="80.0" text="5">
-                    <font><Font size="28.0"/></font>
+                    <font><Font size="28.0" /></font>
                 </Button>
                 <Button fx:id="btn6" mnemonicParsing="false" onAction="#modifica" prefHeight="80.0" prefWidth="80.0" text="6">
-                    <font><Font size="28.0"/></font>
+                    <font><Font size="28.0" /></font>
                 </Button>
                 <Button fx:id="sott" mnemonicParsing="false" onAction="#modifica" prefHeight="80.0" prefWidth="80.0" text="-">
-                    <font><Font size="32.0"/></font>
+                    <font><Font size="32.0" /></font>
                 </Button>
             </children>
         </HBox>
@@ -73,16 +73,16 @@
         <HBox alignment="CENTER" prefHeight="90.0" prefWidth="360.0" spacing="12.0">
             <children>
                 <Button fx:id="btn1" mnemonicParsing="false" onAction="#modifica" prefHeight="80.0" prefWidth="80.0" text="1">
-                    <font><Font size="28.0"/></font>
+                    <font><Font size="28.0" /></font>
                 </Button>
                 <Button fx:id="btn2" mnemonicParsing="false" onAction="#modifica" prefHeight="80.0" prefWidth="80.0" text="2">
-                    <font><Font size="28.0"/></font>
+                    <font><Font size="28.0" /></font>
                 </Button>
                 <Button fx:id="btn3" mnemonicParsing="false" onAction="#modifica" prefHeight="80.0" prefWidth="80.0" text="3">
-                    <font><Font size="28.0"/></font>
+                    <font><Font size="28.0" /></font>
                 </Button>
                 <Button fx:id="add" mnemonicParsing="false" onAction="#modifica" prefHeight="80.0" prefWidth="80.0" text="+">
-                    <font><Font size="32.0"/></font>
+                    <font><Font size="32.0" /></font>
                 </Button>
             </children>
         </HBox>
@@ -90,13 +90,13 @@
         <HBox alignment="CENTER" prefHeight="90.0" prefWidth="360.0" spacing="12.0">
             <children>
                 <Button fx:id="btn0" mnemonicParsing="false" onAction="#modifica" prefHeight="80.0" prefWidth="160.0" text="0">
-                    <font><Font size="28.0"/></font>
+                    <font><Font size="28.0" /></font>
                 </Button>
                 <Button fx:id="uguale" mnemonicParsing="false" onAction="#risultato" prefHeight="80.0" prefWidth="80.0" text="=">
-                    <font><Font size="32.0"/></font>
+                    <font><Font size="32.0" /></font>
                 </Button>
-                <Button fx:id="div" mnemonicParsing="false" onAction="#modifica" prefHeight="80.0" prefWidth="80.0" text="÷">
-                    <font><Font size="28.0"/></font>
+                <Button fx:id="div" mnemonicParsing="false" onAction="#modifica" prefHeight="80.0" prefWidth="80.0" text="/">
+                    <font><Font size="28.0" /></font>
                 </Button>
             </children>
         </HBox>
@@ -104,7 +104,7 @@
         <HBox alignment="CENTER" prefHeight="90.0" prefWidth="360.0">
             <children>
                 <Button fx:id="canc" mnemonicParsing="false" onAction="#cancella" prefHeight="80.0" prefWidth="360.0" text="Cancella">
-                    <font><Font size="28.0"/></font>
+                    <font><Font size="28.0" /></font>
                 </Button>
             </children>
         </HBox>

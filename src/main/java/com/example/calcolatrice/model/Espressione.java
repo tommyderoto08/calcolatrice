@@ -22,7 +22,7 @@ public class Espressione {
         boolean inLetturaNumero = false;
         for (char c : inputExpr.toCharArray()) {
             switch (c) {
-                case '+', '-', '*', '/', '^':
+                case '+', '-', '*', '/', '^', '(', ')':
                     if(inLetturaNumero){
                         tokenList.add(new Frazione(numeratore, 1));
                         inLetturaNumero = false;
@@ -38,8 +38,15 @@ public class Espressione {
                         tokenList.add(Operatore.DIV);
                     else if (c=='^')
                         tokenList.add(Operatore.POW);
+                    else if (c=='(')
+                        tokenList.add(Parentesi.PARENTESI_APERTA);
+                    else if (c==')')
+                        tokenList.add(Parentesi.PARENTESI_CHIUSA);
                     break;
-
+                case '1', '2', '3', '4', '5', '6', '7', '8', '9', '0':
+                    numeratore = (numeratore * 10) + Long.parseLong(Character.toString(c));
+                    inLetturaNumero = true;
+                    break;
                 default:
                     throw new ExpressionException(
                             "Carattere non valido",
